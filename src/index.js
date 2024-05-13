@@ -1,17 +1,8 @@
-import express from "express";
-import * as dotenv from 'dotenv';
-dotenv.config();
-const app = express();
+import dotenv from 'dotenv';
+import connectDB from "./db/index.js";
+dotenv.config({ path:'./env' });
 
-const PORT = process.env.PORT || 8000;
+// As async function returns promise, handle it
+connectDB();
 
-// middlewares
-app.use(express.json());
-
-app.get("/",(req,res)=>{
-    res.send("Youtube Clone Express App");
-});
-
-app.listen(PORT, ()=>{
-    console.log(`Server started at: http://localhost:${PORT}`);
-});
+// When you make changes in environment variable, do restart nodemon can't help in this case.
